@@ -11,7 +11,7 @@ namespace Breakout
     {
         private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private Paddle _paddle;
+        private GameObjects _gameObjects;
 
         public Breakout()
         {
@@ -41,7 +41,9 @@ namespace Breakout
             // Create a new SpriteBatch, which can be used to draw textures.
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            _paddle = new Paddle(Content.Load<Texture2D>("paddleBlu"), Window.ClientBounds);
+            _gameObjects = new GameObjects();
+            _gameObjects.Paddle = new Paddle(Content.Load<Texture2D>("paddleBlu"), Window.ClientBounds);
+            _gameObjects.Ball = new Ball(Content.Load<Texture2D>("ballGrey"), Window.ClientBounds, _gameObjects);
         }
 
         /// <summary>
@@ -63,7 +65,8 @@ namespace Breakout
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            _paddle.Update(gameTime);
+            _gameObjects.Paddle.Update(gameTime);
+            _gameObjects.Ball.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -78,7 +81,8 @@ namespace Breakout
 
             _spriteBatch.Begin();
 
-            _paddle.Draw(_spriteBatch);
+            _gameObjects.Paddle.Draw(_spriteBatch);
+            _gameObjects.Ball.Draw(_spriteBatch);
 
             _spriteBatch.End();
 

@@ -1,0 +1,8 @@
+﻿namespace Breakout
+{
+    public class GameObjects
+    {
+        public Paddle Paddle { get; set; }
+        public Ball Ball { get; set; }
+    }
+}

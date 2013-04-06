@@ -35,7 +35,10 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Ball.cs" />
     <Compile Include="Breakout.cs" />
+    <Compile Include="Sprite.cs" />
+    <Compile Include="GameObjects.cs" />
     <Compile Include="IGameObject.cs" />
     <Compile Include="Paddle.cs" />
     <Compile Include="Program.cs" />
