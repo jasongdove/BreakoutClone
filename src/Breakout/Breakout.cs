@@ -9,13 +9,13 @@ namespace Breakout
     /// </summary>
     public class Breakout : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        private readonly GraphicsDeviceManager _graphics;
+        private SpriteBatch _spriteBatch;
+        private Paddle _paddle;
 
         public Breakout()
-            : base()
         {
-            graphics = new GraphicsDeviceManager(this);
+            _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
 
@@ -39,9 +39,9 @@ namespace Breakout
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            _paddle = new Paddle(Content.Load<Texture2D>("paddleBlu"), Window.ClientBounds);
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Breakout
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            _paddle.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -76,7 +76,11 @@ namespace Breakout
         {
             GraphicsDevice.Clear(new Color(70, 92, 141));
 
-            // TODO: Add your drawing code here
+            _spriteBatch.Begin();
+
+            _paddle.Draw(_spriteBatch);
+
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
