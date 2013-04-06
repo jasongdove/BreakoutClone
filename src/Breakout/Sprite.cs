@@ -15,6 +15,7 @@ namespace Breakout
         }
 
         public Vector2 Position { get; protected set; }
+        public Vector2 Velocity { get; protected set; }
 
         public int Width
         {
@@ -36,7 +37,17 @@ namespace Breakout
             get { return _texture; }
         }
 
-        public abstract void Update(GameTime gameTime);
+        public virtual void Update(GameTime gameTime)
+        {
+            Position = new Vector2(
+                Position.X + Velocity.X,
+                Position.Y + Velocity.Y);
+
+            CheckBounds();
+        }
+
         public abstract void Draw(SpriteBatch spriteBatch);
+
+        protected abstract void CheckBounds();
     }
 }

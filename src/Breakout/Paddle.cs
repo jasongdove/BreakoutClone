@@ -25,22 +25,30 @@ namespace Breakout
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
-                Position = new Vector2(Position.X - HorizontalVelocity, Position.Y);
+                Velocity = new Vector2(-HorizontalVelocity, 0);
             }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            else if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
-                Position = new Vector2(Position.X + HorizontalVelocity, Position.Y);
+                Velocity = new Vector2(HorizontalVelocity, 0);
+            }
+            else
+            {
+                Velocity = Vector2.Zero;
             }
 
-            Position = new Vector2(
-                MathHelper.Clamp(Position.X, 0, ScreenBounds.Width - Width),
-                Position.Y);
+            base.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Texture, Position, Color.White);
+        }
+
+        protected override void CheckBounds()
+        {
+            Position = new Vector2(
+                MathHelper.Clamp(Position.X, 0, ScreenBounds.Width - Width),
+                Position.Y);
         }
     }
 }
