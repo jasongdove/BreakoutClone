@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using FarseerPhysics.Dynamics;
 using FarseerPhysics.Dynamics.Contacts;
 using FarseerPhysics.Factories;
@@ -35,6 +34,7 @@ namespace Breakout
             {
                 // TODO: Lose a life
                 _isAttachedToPaddle = true;
+                _gameObjects.Paddle.SetStartPosition();
             }
 
             return true;

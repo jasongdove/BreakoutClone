@@ -27,10 +27,8 @@ namespace Breakout
             var compound = BodyFactory.CreateCompoundPolygon(world, list, 1);
             compound.BodyType = BodyType.Dynamic;
             Body = compound;
-            Body.Position = new Vector2(
-                ConvertUnits.ToSimUnits((ScreenBounds.Width - Width) / 2f),
-                ConvertUnits.ToSimUnits(ScreenBounds.Height - 50));
             Body.Restitution = 1;
+            SetStartPosition();
 
             _joint = new FixedPrismaticJoint(Body, Body.Position, new Vector2(1, 0));
             _joint.LimitEnabled = true;
@@ -41,15 +39,23 @@ namespace Breakout
             world.AddJoint(_joint);
         }
 
+        public void SetStartPosition()
+        {
+            Body.Position = new Vector2(
+                ConvertUnits.ToSimUnits((ScreenBounds.Width - Width) / 2f),
+                ConvertUnits.ToSimUnits(ScreenBounds.Height - 50));
+        }
+
         public override void Update(GameTime gameTime)
         {
             Body.LinearVelocity = Vector2.Zero;
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            var keyboardState = Keyboard.GetState();
+            if (keyboardState.IsKeyDown(Keys.Left))
             {
                 Body.ApplyLinearImpulse(ConvertUnits.ToSimUnits(new Vector2(-HorizontalVelocity, 0)));
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            else if (keyboardState.IsKeyDown(Keys.Right))
             {
                 Body.ApplyLinearImpulse(ConvertUnits.ToSimUnits(new Vector2(HorizontalVelocity, 0)));
             }
