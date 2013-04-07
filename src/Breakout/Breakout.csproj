@@ -40,6 +40,7 @@
     <Compile Include="Brick.cs" />
     <Compile Include="Level\Block.cs" />
     <Compile Include="Level\Level.cs" />
+    <Compile Include="Screens\DebugScreen.cs" />
     <Compile Include="Screens\PauseScreen.cs" />
     <Compile Include="Session\Player.cs" />
     <Compile Include="Session\Session.cs" />

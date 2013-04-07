@@ -34,7 +34,9 @@ namespace Breakout
         protected override void Initialize()
         {
             var screenBounds = new Rectangle(0, 0, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
-            _screenManager.AddScreen(new PlayScreen(new Session(screenBounds)));
+            var session = new Session(screenBounds);
+            _screenManager.AddScreen(new PlayScreen(session));
+            //_screenManager.AddScreen(new DebugScreen(session.World, session.ScreenBounds));
             _clearColor = Color.Black;
             base.Initialize();
         }

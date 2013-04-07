@@ -94,11 +94,18 @@ namespace GameEngine
                 if (Body != null)
                 {
                     _position = ConvertUnits.ToDisplayUnits(Body.Position);
+                    Rotation = Body.Rotation;
                 }
             }
             else if (_status == ObjectStatus.Dying)
             {
                 Dying(gameTime);
+
+                if (Body != null)
+                {
+                    _position = ConvertUnits.ToDisplayUnits(Body.Position);
+                    Rotation = Body.Rotation;
+                }
             }
             else if (_status == ObjectStatus.Dead)
             {

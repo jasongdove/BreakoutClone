@@ -26,6 +26,11 @@ namespace Breakout
 
         public bool IsPaused { get; private set; }
 
+        public World World
+        {
+            get { return _world; }
+        }
+
         public Level Level
         {
             get { return _level; }
