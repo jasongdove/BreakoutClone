@@ -11,7 +11,7 @@ namespace Breakout
 {
     public class Paddle : Sprite
     {
-        private const float HorizontalVelocity = 7f;
+        private const float HorizontalVelocity = 65f;
 
         private readonly FixedPrismaticJoint _joint;
 
@@ -27,7 +27,6 @@ namespace Breakout
             var compound = BodyFactory.CreateCompoundPolygon(world, list, 1);
             compound.BodyType = BodyType.Dynamic;
             Body = compound;
-            Body.LinearDamping = 3.5f;
             Body.Position = new Vector2(
                 ConvertUnits.ToSimUnits((ScreenBounds.Width - Width) / 2f),
                 ConvertUnits.ToSimUnits(ScreenBounds.Height - 50));
@@ -44,6 +43,8 @@ namespace Breakout
 
         public override void Update(GameTime gameTime)
         {
+            Body.LinearVelocity = Vector2.Zero;
+
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
                 Body.ApplyLinearImpulse(ConvertUnits.ToSimUnits(new Vector2(-HorizontalVelocity, 0)));
@@ -51,11 +52,6 @@ namespace Breakout
             else if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
                 Body.ApplyLinearImpulse(ConvertUnits.ToSimUnits(new Vector2(HorizontalVelocity, 0)));
-            }
-            else
-            {
-                //Body.ApplyLinearImpulse(new Vector2(-Body.LinearVelocity.X, 0));
-                Body.LinearVelocity = Vector2.Zero;
             }
 
             base.Update(gameTime);
