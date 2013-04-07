@@ -15,6 +15,7 @@ namespace Breakout
         private SpriteBatch _spriteBatch;
         private GameObjects _gameObjects;
         private World _world;
+        private Texture2D _background;
 
         public Breakout()
         {
@@ -86,6 +87,8 @@ namespace Breakout
                     _gameObjects.Bricks.Add(brick);
                 }
             }
+
+            _background = Content.Load<Texture2D>("bg5");
         }
 
         /// <summary>
@@ -125,9 +128,11 @@ namespace Breakout
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(new Color(70, 92, 141));
+            ////GraphicsDevice.Clear(new Color(70, 92, 141));
 
             _spriteBatch.Begin();
+
+            _spriteBatch.Draw(_background, Vector2.Zero, Color.White);
 
             foreach (var brick in _gameObjects.Bricks)
             {

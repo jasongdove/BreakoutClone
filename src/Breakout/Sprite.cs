@@ -49,11 +49,8 @@ namespace Breakout
 
         public virtual void Update(GameTime gameTime)
         {
-            CheckBounds();
         }
 
         public abstract void Draw(SpriteBatch spriteBatch);
-
-        protected abstract void CheckBounds();
     }
 }

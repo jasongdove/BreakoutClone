@@ -67,9 +67,5 @@ namespace Breakout
         {
             spriteBatch.Draw(Texture, Position, Color.White);
         }
-
-        protected override void CheckBounds()
-        {
-        }
     }
 }

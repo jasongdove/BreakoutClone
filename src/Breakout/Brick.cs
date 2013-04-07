@@ -37,8 +37,6 @@ namespace Breakout
         {
             if (fixtureB.Body == _gameObjects.Ball.Body)
             {
-                //_world.RemoveBody(Body);
-                //_isActive = false;
                 Body.BodyType = BodyType.Dynamic;
                 Body.Mass = 5000;
                 Body.IgnoreCollisionWith(_gameObjects.Ball.Body);
@@ -73,10 +71,6 @@ namespace Breakout
                     new Vector2(Position.X - Width / 2f, Position.Y - Height / 2f),
                     Color.White * _alpha);
             }
-        }
-
-        protected override void CheckBounds()
-        {
         }
     }
 }

@@ -90,23 +90,5 @@ namespace Breakout
                 new Vector2(Position.X - Width / 2f, Position.Y - Height / 2f),
                 Color.White);
         }
-
-        protected override void CheckBounds()
-        {
-            ////if (Position.X <= 0)
-            ////{
-            ////    Velocity = new Vector2(-Velocity.X, Velocity.Y);
-            ////}
-
-            ////if (Position.X + Width >= ScreenBounds.Width)
-            ////{
-            ////    Velocity = new Vector2(-Velocity.X, Velocity.Y);
-            ////}
-
-            ////if (Position.Y <= 0)
-            ////{
-            ////    Velocity = new Vector2(Velocity.X, -Velocity.Y);
-            ////}
-        }
     }
 }
