@@ -11,7 +11,7 @@ namespace Breakout
 {
     public class Paddle : Sprite
     {
-        private const float HorizontalVelocity = 65f;
+        private const float HorizontalVelocity = 70f;
 
         private readonly FixedPrismaticJoint _joint;
 

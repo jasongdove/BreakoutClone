@@ -24,6 +24,7 @@ namespace Breakout
 
             Body = BodyFactory.CreateCircle(world, ConvertUnits.ToSimUnits(Texture.Width) / 2f, 1);
             Body.BodyType = BodyType.Dynamic;
+            Body.IgnoreGravity = true;
             Body.OnCollision += Body_OnCollision;
 
             _speedLimit = 25f;
@@ -67,6 +68,11 @@ namespace Breakout
                 if (Math.Abs(Body.LinearVelocity.Y) < 4f)
                 {
                     Body.ApplyLinearImpulse(Math.Sign(Body.LinearVelocity.Y) * ConvertUnits.ToSimUnits(new Vector2(0, 4)));
+                }
+
+                if (Math.Abs(Body.LinearVelocity.X) < 1f)
+                {
+                    Body.ApplyLinearImpulse(Math.Sign(Body.LinearVelocity.X) * ConvertUnits.ToSimUnits(new Vector2(1, 0)));
                 }
 
                 Body.LinearVelocity = new Vector2(

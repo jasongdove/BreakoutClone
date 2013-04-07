@@ -49,7 +49,7 @@ namespace Breakout
 
             if (_world == null)
             {
-                _world = new World(Vector2.Zero);
+                _world = new World(new Vector2(0, 10));
             }
             else
             {
@@ -109,6 +109,10 @@ namespace Breakout
 
             _world.Step(MathHelper.Min((float)gameTime.ElapsedGameTime.TotalMilliseconds * 0.001f, 1/33f));
 
+            foreach (var brick in _gameObjects.Bricks)
+            {
+                brick.Update(gameTime);
+            }
             _gameObjects.Paddle.Update(gameTime);
             _gameObjects.Ball.Update(gameTime);
 
@@ -125,12 +129,12 @@ namespace Breakout
 
             _spriteBatch.Begin();
 
-            _gameObjects.Paddle.Draw(_spriteBatch);
-            _gameObjects.Ball.Draw(_spriteBatch);
             foreach (var brick in _gameObjects.Bricks)
             {
                 brick.Draw(_spriteBatch);
             }
+            _gameObjects.Paddle.Draw(_spriteBatch);
+            _gameObjects.Ball.Draw(_spriteBatch);
 
             _spriteBatch.End();
 
