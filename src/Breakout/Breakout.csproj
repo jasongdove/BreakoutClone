@@ -38,13 +38,19 @@
     <Compile Include="Ball.cs" />
     <Compile Include="Breakout.cs" />
     <Compile Include="Brick.cs" />
-    <Compile Include="ConvertUnits.cs" />
+    <Compile Include="Level\Block.cs" />
+    <Compile Include="Level\Level.cs" />
+    <Compile Include="Screens\PauseScreen.cs" />
+    <Compile Include="Session\Player.cs" />
+    <Compile Include="Session\Session.cs" />
+    <Compile Include="Screens\PlayScreen.cs" />
     <Compile Include="Sprite.cs" />
     <Compile Include="GameObjects.cs" />
     <Compile Include="IGameObject.cs" />
     <Compile Include="Paddle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\UserInterface.cs" />
     <Compile Include="Walls.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +101,12 @@
     <Content Include="Content\bg5.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GameEngine\GameEngine.csproj">
+      <Project>{6d0a1296-a7c8-4a73-bd6c-d38ccd389ad6}</Project>
+      <Name>GameEngine</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

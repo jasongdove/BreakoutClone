@@ -2,6 +2,7 @@
 using FarseerPhysics.Common;
 using FarseerPhysics.Dynamics;
 using FarseerPhysics.Factories;
+using GameEngine;
 using Microsoft.Xna.Framework;
 
 namespace Breakout

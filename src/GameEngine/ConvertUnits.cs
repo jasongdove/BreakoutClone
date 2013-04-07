@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace Breakout
+namespace GameEngine
 {
     /// <summary>
     /// Convert units between display and simulation units.
