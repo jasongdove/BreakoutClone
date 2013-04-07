@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FarseerPhysics.Dynamics;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Breakout
@@ -14,8 +15,15 @@ namespace Breakout
             _screenBounds = screenBounds;
         }
 
-        public Vector2 Position { get; protected set; }
-        public Vector2 Velocity { get; protected set; }
+        public Vector2 Position
+        {
+            get { return ConvertUnits.ToDisplayUnits(Body.Position); }
+        }
+
+        public Vector2 Velocity
+        {
+            get { return Body.LinearVelocity; }
+        }
 
         public int Width
         {
@@ -26,6 +34,8 @@ namespace Breakout
         {
             get { return _texture.Height; }
         }
+
+        public Body Body { get; protected set; }
 
         protected Rectangle ScreenBounds
         {
@@ -39,10 +49,6 @@ namespace Breakout
 
         public virtual void Update(GameTime gameTime)
         {
-            Position = new Vector2(
-                Position.X + Velocity.X,
-                Position.Y + Velocity.Y);
-
             CheckBounds();
         }
 
