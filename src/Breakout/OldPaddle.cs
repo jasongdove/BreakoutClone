@@ -10,13 +10,13 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Breakout
 {
-    public class Paddle : Sprite
+    public class OldPaddle : Sprite
     {
         private const float HorizontalVelocity = 70f;
 
         private readonly FixedPrismaticJoint _joint;
 
-        public Paddle(Texture2D texture, Rectangle screenBounds, World world)
+        public OldPaddle(Texture2D texture, Rectangle screenBounds, World world)
             : base(texture, screenBounds)
         {
             var data = new uint[texture.Width * texture.Height];

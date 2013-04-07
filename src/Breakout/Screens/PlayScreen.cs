@@ -1,6 +1,7 @@
 ﻿using Breakout.UI;
 using GameEngine;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace Breakout.Screens
 {
@@ -22,6 +23,9 @@ namespace Breakout.Screens
         public override void InitializeScreen()
         {
             _ui = new UserInterface(_session);
+
+            InputMap.NewAction("MoveLeft", Keys.Left);
+            InputMap.NewAction("MoveRight", Keys.Right);
         }
 
         public override void LoadContent()
@@ -41,6 +45,16 @@ namespace Breakout.Screens
             {
                 FreezeScreen();
                 ScreenManager.AddScreen(new PauseScreen(this, _session));
+            }
+
+            _session.Level.Paddle.StopMoving();
+            if (InputMap.ActionPressed("MoveLeft"))
+            {
+                _session.Level.Paddle.MoveLeft();
+            }
+            else if (InputMap.ActionPressed("MoveRight"))
+            {
+                _session.Level.Paddle.MoveRight();
             }
 
             // TODO: Support pausing

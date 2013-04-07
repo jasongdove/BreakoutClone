@@ -49,7 +49,8 @@ namespace GameEngine
 
         public void Update(GameTime gameTime)
         {
-            //TODO: InputSystem.Update(gameTime);
+            InputSystem.Update(gameTime);
+
             if (State == ScreenState.Frozen || State == ScreenState.Inactive)
             {
                 return;

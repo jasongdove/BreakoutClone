@@ -9,10 +9,13 @@ namespace Breakout
     public class Level
     {
         private readonly List<Block> _blocks = new List<Block>();
+        private readonly Paddle _paddle;
         private Texture2D _background;
 
         public Level(World world, Rectangle screenBounds)
         {
+            _paddle = new Paddle(world, screenBounds);
+
             // TODO: Load level from file/resource
             for (int y = 0; y < 5; y++)
             {
@@ -23,9 +26,17 @@ namespace Breakout
             }
         }
 
+        public Paddle Paddle
+        {
+            get { return _paddle; }
+        }
+
         public void LoadContent(ContentManager content)
         {
             _background = content.Load<Texture2D>("bg5");
+
+            _paddle.Texture = content.Load<Texture2D>("paddleBlu");
+            _paddle.Initialize();
 
             var texture = content.Load<Texture2D>("element_blue_rectangle");
             foreach (var block in _blocks)
@@ -41,6 +52,8 @@ namespace Breakout
             {
                 block.Update(gameTime);
             }
+
+            _paddle.Update(gameTime);
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -51,6 +64,8 @@ namespace Breakout
             {
                 block.Draw(gameTime, spriteBatch);
             }
+
+            _paddle.Draw(gameTime, spriteBatch);
         }
     }
 }

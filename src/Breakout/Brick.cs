@@ -27,7 +27,7 @@ namespace Breakout
             Body.Position = ConvertUnits.ToSimUnits((screenBounds.Width - Texture.Width * 10) + Texture.Width * x, 100 + Texture.Height * y);
 
             Body.OnCollision += Body_OnCollision;
-            Body.IgnoreCollisionWith(gameObjects.Paddle.Body);
+            Body.IgnoreCollisionWith(gameObjects.OldPaddle.Body);
 
             _isActive = true;
             _alpha = 1.0f;

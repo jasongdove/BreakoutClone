@@ -3,13 +3,11 @@ using FarseerPhysics.Dynamics;
 using FarseerPhysics.Factories;
 using GameEngine;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace Breakout
 {
     public class Block : GameplayObject
     {
-        private readonly Random _random;
         private readonly World _world;
         private readonly Rectangle _screenBounds;
         private readonly int _x;
@@ -17,8 +15,6 @@ namespace Breakout
 
         public Block(World world, Rectangle screenBounds, int x, int y)
         {
-            _random = new Random(x + y * 1000);
-
             _world = world;
             _screenBounds = screenBounds;
             _x = x;
@@ -53,17 +49,12 @@ namespace Breakout
         public override void Update(GameTime gameTime)
         {
             // TODO: Die if needed
-            if (_random.Next(1000) == 66 && Status != ObjectStatus.Dying && Status != ObjectStatus.Dead)
-            {
-                Die();
-            }
+            ////if (_random.Next(1000) == 66 && Status != ObjectStatus.Dying && Status != ObjectStatus.Dead)
+            ////{
+            ////    Die();
+            ////}
 
             base.Update(gameTime);
-        }
-
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            base.Draw(gameTime, spriteBatch);
         }
 
         public override void Die()

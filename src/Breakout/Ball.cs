@@ -38,7 +38,7 @@ namespace Breakout
             {
                 // TODO: Lose a life
                 _isAttachedToPaddle = true;
-                _gameObjects.Paddle.SetStartPosition();
+                _gameObjects.OldPaddle.SetStartPosition();
             }
 
             return true;
@@ -51,9 +51,9 @@ namespace Breakout
                 _isAttachedToPaddle = false;
 
                 Body.ApplyLinearImpulse(new Vector2(
-                    _gameObjects.Paddle.Body.LinearVelocity.X < 0
-                        ? MathHelper.Clamp(_gameObjects.Paddle.Body.LinearVelocity.X, -0.12f, 0)
-                        : MathHelper.Clamp(_gameObjects.Paddle.Body.LinearVelocity.X, 0, 0.12f),
+                    _gameObjects.OldPaddle.Body.LinearVelocity.X < 0
+                        ? MathHelper.Clamp(_gameObjects.OldPaddle.Body.LinearVelocity.X, -0.12f, 0)
+                        : MathHelper.Clamp(_gameObjects.OldPaddle.Body.LinearVelocity.X, 0, 0.12f),
                     -ConvertUnits.ToSimUnits(VerticalVelocity)));
             }
 
@@ -61,8 +61,8 @@ namespace Breakout
             {
                 Body.LinearVelocity = Vector2.Zero;
                 Body.Position = new Vector2(
-                    ConvertUnits.ToSimUnits(_gameObjects.Paddle.Position.X + _gameObjects.Paddle.Width / 2f),
-                    ConvertUnits.ToSimUnits(_gameObjects.Paddle.Position.Y - Height / 2f));
+                    ConvertUnits.ToSimUnits(_gameObjects.OldPaddle.Position.X + _gameObjects.OldPaddle.Width / 2f),
+                    ConvertUnits.ToSimUnits(_gameObjects.OldPaddle.Position.Y - Height / 2f));
             }
             else
             {

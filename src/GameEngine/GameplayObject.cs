@@ -36,7 +36,7 @@ namespace GameEngine
             }
         }
 
-        public Vector2 Origin
+        public virtual Vector2 Origin
         {
             get { return new Vector2(_texture.Width / 2f, _texture.Height / 2f); }
         }

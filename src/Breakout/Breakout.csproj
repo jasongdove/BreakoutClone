@@ -40,6 +40,7 @@
     <Compile Include="Brick.cs" />
     <Compile Include="Level\Block.cs" />
     <Compile Include="Level\Level.cs" />
+    <Compile Include="Level\Paddle.cs" />
     <Compile Include="Screens\DebugScreen.cs" />
     <Compile Include="Screens\PauseScreen.cs" />
     <Compile Include="Session\Player.cs" />
@@ -48,7 +49,7 @@
     <Compile Include="Sprite.cs" />
     <Compile Include="GameObjects.cs" />
     <Compile Include="IGameObject.cs" />
-    <Compile Include="Paddle.cs" />
+    <Compile Include="OldPaddle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\UserInterface.cs" />
