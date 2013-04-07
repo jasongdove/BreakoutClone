@@ -14,6 +14,7 @@ namespace Breakout
 
         private readonly GameObjects _gameObjects;
         private bool _isAttachedToPaddle;
+        private float _speedLimit;
 
         public Ball(Texture2D texture, Rectangle screenBounds, World world, GameObjects gameObjects)
             : base(texture, screenBounds)
@@ -23,8 +24,9 @@ namespace Breakout
 
             Body = BodyFactory.CreateCircle(world, ConvertUnits.ToSimUnits(Texture.Width) / 2f, 1);
             Body.BodyType = BodyType.Dynamic;
-
             Body.OnCollision += Body_OnCollision;
+
+            _speedLimit = 25f;
         }
 
         private bool Body_OnCollision(Fixture fixtureA, Fixture fixtureB, Contact contact)
@@ -62,10 +64,14 @@ namespace Breakout
             }
             else
             {
-                if (Math.Abs(Body.LinearVelocity.Y - 0f) < float.Epsilon)
+                if (Math.Abs(Body.LinearVelocity.Y) < 4f)
                 {
-                    Body.ApplyLinearImpulse(ConvertUnits.ToSimUnits(new Vector2(0, 1)));
+                    Body.ApplyLinearImpulse(Math.Sign(Body.LinearVelocity.Y) * ConvertUnits.ToSimUnits(new Vector2(0, 4)));
                 }
+
+                Body.LinearVelocity = new Vector2(
+                    MathHelper.Clamp(Body.LinearVelocity.X, -_speedLimit, _speedLimit),
+                    MathHelper.Clamp(Body.LinearVelocity.Y, -_speedLimit, _speedLimit));
             }
 
             base.Update(gameTime);

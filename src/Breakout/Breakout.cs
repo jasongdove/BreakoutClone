@@ -1,4 +1,5 @@
-﻿using FarseerPhysics.Dynamics;
+﻿using System.Collections.Generic;
+using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -74,6 +75,17 @@ namespace Breakout
 
             // paddle shouldn't bounce off of walls
             _gameObjects.Paddle.Body.IgnoreCollisionWith(_gameObjects.Walls.Body);
+
+            _gameObjects.Bricks = new List<Brick>();
+            var brickTexture = Content.Load<Texture2D>("element_blue_rectangle");
+            for (int y = 0; y < 4; y++)
+            {
+                for (int x = 0; x < 10; x++)
+                {
+                    var brick = new Brick(brickTexture, screenBounds, _world, _gameObjects, x, y);
+                    _gameObjects.Bricks.Add(brick);
+                }
+            }
         }
 
         /// <summary>
@@ -115,6 +127,10 @@ namespace Breakout
 
             _gameObjects.Paddle.Draw(_spriteBatch);
             _gameObjects.Ball.Draw(_spriteBatch);
+            foreach (var brick in _gameObjects.Bricks)
+            {
+                brick.Draw(_spriteBatch);
+            }
 
             _spriteBatch.End();
 
