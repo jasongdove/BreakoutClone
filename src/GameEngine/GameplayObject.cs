@@ -94,7 +94,7 @@ namespace GameEngine
                 if (Body != null)
                 {
                     _position = ConvertUnits.ToDisplayUnits(Body.Position);
-                    Rotation = Body.Rotation;
+                    //Rotation = Body.Rotation;
                 }
             }
             else if (_status == ObjectStatus.Dying)
@@ -104,7 +104,7 @@ namespace GameEngine
                 if (Body != null)
                 {
                     _position = ConvertUnits.ToDisplayUnits(Body.Position);
-                    Rotation = Body.Rotation;
+                    //Rotation = Body.Rotation;
                 }
             }
             else if (_status == ObjectStatus.Dead)

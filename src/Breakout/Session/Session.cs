@@ -54,8 +54,14 @@ namespace Breakout
 
                 _ui.UpdateUI(gameTime);
 
-                // TODO: Update paddle, ball, etc
                 _level.Update(gameTime);
+
+                if (_level.Ball.Position.Y > _screenBounds.Height)
+                {
+                    _level.Ball.Reset();
+                    _level.Paddle.SetStartPosition();
+                    _player.Lives--;
+                }
 
                 // TODO: If round.state == finished, new round ??
             }

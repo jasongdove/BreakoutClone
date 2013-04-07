@@ -41,6 +41,13 @@ namespace Breakout
             Body.LinearVelocity = Vector2.Zero;
         }
 
+        public void SetStartPosition()
+        {
+            Body.Position = new Vector2(
+                ConvertUnits.ToSimUnits((_screenBounds.Width - Texture.Width) / 2f),
+                ConvertUnits.ToSimUnits(_screenBounds.Height - 50));
+        }
+
         public override void Initialize()
         {
             if (_world != null && Texture != null)
@@ -68,13 +75,6 @@ namespace Breakout
             }
 
             base.Initialize();
-        }
-
-        private void SetStartPosition()
-        {
-            Body.Position = new Vector2(
-                ConvertUnits.ToSimUnits((_screenBounds.Width - Texture.Width) / 2f),
-                ConvertUnits.ToSimUnits(_screenBounds.Height - 50));
         }
     }
 }

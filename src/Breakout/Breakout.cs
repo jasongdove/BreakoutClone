@@ -47,38 +47,10 @@ namespace Breakout
         /// </summary>
         protected override void LoadContent()
         {
-            ////var screenBounds = Window.ClientBounds;
-
-            ////_gameObjects = new GameObjects();
-
-            ////_gameObjects.Paddle = new Paddle(
-            ////    Content.Load<Texture2D>("paddleBlu"),
-            ////    screenBounds,
-            ////    _world);
-            
-            ////_gameObjects.Ball = new Ball(
-            ////    Content.Load<Texture2D>("ballGrey"),
-            ////    screenBounds,
-            ////    _world,
-            ////    _gameObjects);
-
             ////_gameObjects.Walls = new Walls(_world, screenBounds, _gameObjects);
 
             ////// paddle shouldn't bounce off of walls
             ////_gameObjects.Paddle.Body.IgnoreCollisionWith(_gameObjects.Walls.Body);
-
-            ////_gameObjects.Bricks = new List<Brick>();
-            ////var brickTexture = Content.Load<Texture2D>("element_blue_rectangle");
-            ////for (int y = 0; y < 4; y++)
-            ////{
-            ////    for (int x = 0; x < 10; x++)
-            ////    {
-            ////        var brick = new Brick(brickTexture, screenBounds, _world, _gameObjects, x, y);
-            ////        _gameObjects.Bricks.Add(brick);
-            ////    }
-            ////}
-
-            ////_background = Content.Load<Texture2D>("bg5");
         }
 
         /// <summary>

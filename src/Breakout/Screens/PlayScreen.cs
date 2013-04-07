@@ -25,7 +25,13 @@ namespace Breakout.Screens
             _ui = new UserInterface(_session);
 
             InputMap.NewAction("MoveLeft", Keys.Left);
+            InputMap.NewAction("MoveLeft", Triggers.LeftTrigger);
+
             InputMap.NewAction("MoveRight", Keys.Right);
+            InputMap.NewAction("MoveRight", Triggers.RightTrigger);
+
+            InputMap.NewAction("FireBall", Keys.Space);
+            InputMap.NewAction("FireBall", Buttons.A);
         }
 
         public override void LoadContent()
@@ -55,6 +61,11 @@ namespace Breakout.Screens
             else if (InputMap.ActionPressed("MoveRight"))
             {
                 _session.Level.Paddle.MoveRight();
+            }
+
+            if (InputMap.NewActionPress("FireBall"))
+            {
+                _session.Level.Ball.Fire();
             }
 
             // TODO: Support pausing

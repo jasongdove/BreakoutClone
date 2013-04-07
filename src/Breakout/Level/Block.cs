@@ -1,5 +1,6 @@
 ﻿using System;
 using FarseerPhysics.Dynamics;
+using FarseerPhysics.Dynamics.Contacts;
 using FarseerPhysics.Factories;
 using GameEngine;
 using Microsoft.Xna.Framework;
@@ -12,13 +13,17 @@ namespace Breakout
         private readonly Rectangle _screenBounds;
         private readonly int _x;
         private readonly int _y;
+        private readonly Ball _ball;
+        private readonly Paddle _paddle;
 
-        public Block(World world, Rectangle screenBounds, int x, int y)
+        public Block(World world, Rectangle screenBounds, int x, int y, Ball ball, Paddle paddle)
         {
             _world = world;
             _screenBounds = screenBounds;
             _x = x;
             _y = y;
+            _ball = ball;
+            _paddle = paddle;
 
             DieTime = TimeSpan.FromSeconds(1);
         }
@@ -41,20 +46,20 @@ namespace Breakout
                 Body.BodyType = BodyType.Static;
                 Body.Restitution = 1;
                 Body.UserData = String.Format("Brick ({0},{1})", _x, _y);
+                Body.OnCollision += OnCollision;
             }
 
             base.Initialize();
         }
 
-        public override void Update(GameTime gameTime)
+        private bool OnCollision(Fixture fixtureA, Fixture fixtureB, Contact contact)
         {
-            // TODO: Die if needed
-            ////if (_random.Next(1000) == 66 && Status != ObjectStatus.Dying && Status != ObjectStatus.Dead)
-            ////{
-            ////    Die();
-            ////}
+            if (fixtureB.Body == _ball.Body)
+            {
+                Die();
+            }
 
-            base.Update(gameTime);
+            return true;
         }
 
         public override void Die()
@@ -63,6 +68,8 @@ namespace Breakout
 
             Body.BodyType = BodyType.Dynamic;
             Body.Mass = 5000;
+            Body.IgnoreCollisionWith(_ball.Body);
+            Body.IgnoreCollisionWith(_paddle.Body);
         }
 
         public override void Dying(GameTime gameTime)

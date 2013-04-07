@@ -107,6 +107,11 @@ namespace GameEngine
             return CurrentGamepadState.Triggers.Right;
         }
 
+        public static Vector2 LeftThumbStick()
+        {
+            return CurrentGamepadState.ThumbSticks.Left;
+        }
+
         public static Vector2 MousePosition()
         {
             return new Vector2(CurrentMouseState.X, CurrentMouseState.Y);
