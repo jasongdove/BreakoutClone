@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using FarseerPhysics.Common;
-using FarseerPhysics.DebugViews;
-using FarseerPhysics.Dynamics;
-using FarseerPhysics.Factories;
+﻿using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -18,7 +14,6 @@ namespace Breakout
         private SpriteBatch _spriteBatch;
         private GameObjects _gameObjects;
         private World _world;
-        private DebugViewXNA _debug;
 
         public Breakout()
         {
@@ -75,43 +70,10 @@ namespace Breakout
                 _world,
                 _gameObjects);
 
-            // walls
-            var borders = new List<Vertices>();
-            var bottom = PolygonTools.CreateRectangle(
-                ConvertUnits.ToSimUnits(screenBounds.Width),
-                0.01f,
-                new Vector2(ConvertUnits.ToSimUnits(screenBounds.Width / 2f), ConvertUnits.ToSimUnits(screenBounds.Height)),
-                0);
-            var left = PolygonTools.CreateRectangle(
-                0.01f,
-                ConvertUnits.ToSimUnits(screenBounds.Height),
-                new Vector2(0, ConvertUnits.ToSimUnits(screenBounds.Height / 2f)),
-                0);
-            var top = PolygonTools.CreateRectangle(
-                ConvertUnits.ToSimUnits(screenBounds.Width),
-                0.01f,
-                new Vector2(ConvertUnits.ToSimUnits(screenBounds.Width / 2f), 0),
-                0);
-            var right = PolygonTools.CreateRectangle(
-                0.01f,
-                ConvertUnits.ToSimUnits(screenBounds.Height),
-                new Vector2(ConvertUnits.ToSimUnits(screenBounds.Width), ConvertUnits.ToSimUnits(screenBounds.Height / 2f)),
-                0);
-            borders.AddRange(new[] { bottom, left, top, right });
-            var body = BodyFactory.CreateCompoundPolygon(_world, borders, 1, 1);
-            foreach (var fixture in body.FixtureList)
-            {
-                fixture.Restitution = 1;
-                fixture.Friction = 0;
-            }
+            _gameObjects.Walls = new Walls(_world, screenBounds, _gameObjects);
 
             // paddle shouldn't bounce off of walls
-            _gameObjects.Paddle.Body.IgnoreCollisionWith(body);
-
-            _debug = new DebugViewXNA(_world);
-            _debug.LoadContent(GraphicsDevice, Content);
-            _debug.AppendFlags(FarseerPhysics.DebugViewFlags.Shape);
-            _debug.AppendFlags(FarseerPhysics.DebugViewFlags.PolygonPoints);
+            _gameObjects.Paddle.Body.IgnoreCollisionWith(_gameObjects.Walls.Body);
         }
 
         /// <summary>
@@ -153,22 +115,6 @@ namespace Breakout
 
             _gameObjects.Paddle.Draw(_spriteBatch);
             _gameObjects.Ball.Draw(_spriteBatch);
-
-            // Debug
-            ////Matrix proj = Matrix.CreateOrthographic(
-            ////    ConvertUnits.ToSimUnits(Window.ClientBounds.Width),
-            ////    -ConvertUnits.ToSimUnits(Window.ClientBounds.Height),
-            ////    0,
-            ////    1000000);
-            ////Vector3 campos = new Vector3();
-            ////campos.X = ConvertUnits.ToSimUnits(-_graphics.PreferredBackBufferWidth / 2f);
-            ////campos.Y = ConvertUnits.ToSimUnits(-_graphics.PreferredBackBufferHeight / 2f);
-            ////campos.Z = 0;
-            ////Matrix tran = Matrix.Identity;
-            ////tran.Translation = campos;
-            ////Matrix view = tran;
-
-            ////_debug.RenderDebugData(ref proj, ref view);
 
             _spriteBatch.End();
 

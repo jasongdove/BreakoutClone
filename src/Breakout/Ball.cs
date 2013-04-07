@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using FarseerPhysics.Dynamics;
+using FarseerPhysics.Dynamics.Contacts;
 using FarseerPhysics.Factories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -22,6 +24,20 @@ namespace Breakout
 
             Body = BodyFactory.CreateCircle(world, ConvertUnits.ToSimUnits(Texture.Width) / 2f, 1);
             Body.BodyType = BodyType.Dynamic;
+
+            Body.OnCollision += Body_OnCollision;
+        }
+
+        private bool Body_OnCollision(Fixture fixtureA, Fixture fixtureB, Contact contact)
+        {
+            var bottomCentroid = _gameObjects.Walls.Bottom.GetCentroid();
+            if (fixtureB.TestPoint(ref bottomCentroid))
+            {
+                // TODO: Lose a life
+                _isAttachedToPaddle = true;
+            }
+
+            return true;
         }
 
         public override void Update(GameTime gameTime)
