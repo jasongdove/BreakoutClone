@@ -1,6 +1,7 @@
 ﻿using Breakout.UI;
 using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 
 namespace Breakout
 {
@@ -22,6 +23,12 @@ namespace Breakout
             _player.Lives = 3;
 
             _level = new Level(_world, screenBounds, _player);
+        }
+
+        public void LoadContent(ContentManager content)
+        {
+            _level.LoadContent(content);
+            _player.LoadContent(content);
         }
 
         public bool IsPaused { get; private set; }

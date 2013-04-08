@@ -1,8 +1,12 @@
 ﻿using System;
 using FarseerPhysics.Dynamics;
+using FarseerPhysics.Dynamics.Contacts;
 using FarseerPhysics.Factories;
 using GameEngine;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Breakout
 {
@@ -12,13 +16,26 @@ namespace Breakout
         
         private readonly World _world;
         private readonly Paddle _paddle;
+        private readonly Player _player;
         private bool _isAttachedToPaddle;
         private float _speedLimit;
+        private DateTime _paddleCollisionTime;
 
-        public Ball(World world, Paddle paddle)
+        private SoundEffect _bounce;
+
+        public Ball(World world, Paddle paddle, Player player)
         {
             _world = world;
             _paddle = paddle;
+            _player = player;
+        }
+
+        public override void LoadContent(ContentManager content)
+        {
+            Texture = content.Load<Texture2D>("ballGrey");
+            _bounce = content.Load<SoundEffect>("001");
+
+            base.LoadContent(content);
         }
 
         public override void Initialize()
@@ -28,11 +45,40 @@ namespace Breakout
                 Body = BodyFactory.CreateCircle(_world, ConvertUnits.ToSimUnits(Texture.Width) / 2f, 1);
                 Body.BodyType = BodyType.Dynamic;
                 Body.IgnoreGravity = true;
+
+                Body.OnCollision += OnCollision;
             }
 
             Reset();
 
             base.Initialize();
+        }
+
+        private bool OnCollision(Fixture fixtureA, Fixture fixtureB, Contact contact)
+        {
+            if (!_isAttachedToPaddle)
+            {
+                if (fixtureB.Body == _paddle.Body)
+                {
+                    _player.ResetStreak();
+
+                    if (DateTime.Now < _paddleCollisionTime)
+                    {
+                        return true;
+                    }
+
+                    _paddleCollisionTime = DateTime.Now.AddMilliseconds(200);
+                }
+
+                // Don't play the bounce sound if the player is going to score
+                // That will get handled elsewhere
+                if (!String.Equals(fixtureB.Body.UserData as string, "BLOCK"))
+                {
+                    _bounce.Play(0.75f, 0, 0);
+                }
+            }
+
+            return true;
         }
 
         public void Reset()

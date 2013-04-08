@@ -16,7 +16,7 @@ namespace Breakout
         public Level(World world, Rectangle screenBounds, Player player)
         {
             _paddle = new Paddle(world, screenBounds);
-            _ball = new Ball(world, _paddle);
+            _ball = new Ball(world, _paddle, player);
             _walls = new Walls(world, screenBounds, _ball, _paddle);
 
             // TODO: Load level from file/resource
@@ -41,10 +41,10 @@ namespace Breakout
 
         public void LoadContent(ContentManager content)
         {
-            _paddle.Texture = content.Load<Texture2D>("paddleBlu");
+            _paddle.LoadContent(content);
             _paddle.Initialize();
 
-            _ball.Texture = content.Load<Texture2D>("ballGrey");
+            _ball.LoadContent(content);
             _ball.Initialize();
 
             _walls.Initialize();

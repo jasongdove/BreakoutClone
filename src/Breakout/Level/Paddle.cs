@@ -5,6 +5,8 @@ using FarseerPhysics.Dynamics.Joints;
 using FarseerPhysics.Factories;
 using GameEngine;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Breakout
 {
@@ -46,6 +48,13 @@ namespace Breakout
             Body.Position = new Vector2(
                 ConvertUnits.ToSimUnits((_screenBounds.Width - Texture.Width) / 2f),
                 ConvertUnits.ToSimUnits(_screenBounds.Height - 70));
+        }
+
+        public override void LoadContent(ContentManager content)
+        {
+            Texture = content.Load<Texture2D>("paddleBlu");
+
+            base.LoadContent(content);
         }
 
         public override void Initialize()

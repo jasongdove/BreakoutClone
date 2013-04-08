@@ -1,6 +1,7 @@
 ﻿using System;
 using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameEngine
@@ -79,6 +80,10 @@ namespace GameEngine
             {
                 _status = _dieTime != TimeSpan.Zero ? ObjectStatus.Dying : ObjectStatus.Dead;
             }
+        }
+
+        public virtual void LoadContent(ContentManager content)
+        {
         }
 
         public virtual void Initialize()

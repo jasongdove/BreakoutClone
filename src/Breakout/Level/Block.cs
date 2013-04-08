@@ -27,7 +27,7 @@ namespace Breakout
             _ball = ball;
             _paddle = paddle;
 
-            DieTime = TimeSpan.FromSeconds(0.75);
+            DieTime = TimeSpan.FromSeconds(0.4);
         }
 
         public override void Initialize()
@@ -47,7 +47,7 @@ namespace Breakout
 
                 Body.BodyType = BodyType.Static;
                 Body.Restitution = 1;
-                Body.UserData = String.Format("Brick ({0},{1})", _x, _y);
+                Body.UserData = "BLOCK";
                 Body.OnCollision += OnCollision;
             }
 
@@ -59,7 +59,7 @@ namespace Breakout
             if (fixtureB.Body == _ball.Body)
             {
                 Die();
-                _player.Score += 100;
+                _player.IncrementScore();
             }
 
             return true;

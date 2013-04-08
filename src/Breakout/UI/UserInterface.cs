@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 
 namespace Breakout.UI
 {
@@ -10,6 +11,7 @@ namespace Breakout.UI
         private readonly Lives _lives;
         private readonly Score _score;
         private Texture2D _background;
+        private Song _music;
 
         public UserInterface(Session session)
         {
@@ -25,8 +27,12 @@ namespace Breakout.UI
         public void LoadContent(ContentManager content)
         {
             _background = content.Load<Texture2D>("bg5");
+            _music = content.Load<Song>("LongDarkLoop_01.wav");
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume = 0.5f;
+            MediaPlayer.Play(_music);
 
-            _session.Level.LoadContent(content);
+            _session.LoadContent(content);
             _lives.LoadContent(content);
             _score.LoadContent(content);
         }
