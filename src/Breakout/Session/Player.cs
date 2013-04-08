@@ -3,6 +3,6 @@
     public class Player
     {
         public uint Score { get; set; }
-        public uint Lives { get; set; }
+        public int Lives { get; set; }
     }
 }

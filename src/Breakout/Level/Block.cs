@@ -15,17 +15,19 @@ namespace Breakout
         private readonly int _y;
         private readonly Ball _ball;
         private readonly Paddle _paddle;
+        private readonly Player _player;
 
-        public Block(World world, Rectangle screenBounds, int x, int y, Ball ball, Paddle paddle)
+        public Block(World world, Rectangle screenBounds, int x, int y, Player player, Ball ball, Paddle paddle)
         {
             _world = world;
             _screenBounds = screenBounds;
             _x = x;
             _y = y;
+            _player = player;
             _ball = ball;
             _paddle = paddle;
 
-            DieTime = TimeSpan.FromSeconds(1);
+            DieTime = TimeSpan.FromSeconds(0.75);
         }
 
         public override void Initialize()
@@ -57,6 +59,7 @@ namespace Breakout
             if (fixtureB.Body == _ball.Body)
             {
                 Die();
+                _player.Score += 100;
             }
 
             return true;

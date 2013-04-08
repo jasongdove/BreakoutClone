@@ -12,9 +12,8 @@ namespace Breakout
         private readonly Paddle _paddle;
         private readonly Ball _ball;
         private readonly Walls _walls;
-        private Texture2D _background;
 
-        public Level(World world, Rectangle screenBounds)
+        public Level(World world, Rectangle screenBounds, Player player)
         {
             _paddle = new Paddle(world, screenBounds);
             _ball = new Ball(world, _paddle);
@@ -25,7 +24,7 @@ namespace Breakout
             {
                 for (int x = 0; x < 10; x++)
                 {
-                    _blocks.Add(new Block(world, screenBounds, x, y, _ball, _paddle));
+                    _blocks.Add(new Block(world, screenBounds, x, y, player, _ball, _paddle));
                 }
             }
         }
@@ -42,8 +41,6 @@ namespace Breakout
 
         public void LoadContent(ContentManager content)
         {
-            _background = content.Load<Texture2D>("bg5");
-
             _paddle.Texture = content.Load<Texture2D>("paddleBlu");
             _paddle.Initialize();
 
@@ -73,8 +70,6 @@ namespace Breakout
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_background, new Vector2(0, 0), Color.White);
-
             foreach (var block in _blocks)
             {
                 block.Draw(gameTime, spriteBatch);

@@ -36,7 +36,7 @@ namespace Breakout.Screens
 
         public override void LoadContent()
         {
-            _session.Level.LoadContent(ScreenManager.Content);
+            _ui.LoadContent(ScreenManager.Content);
         }
 
         protected override void DrawScreen(GameTime gameTime)

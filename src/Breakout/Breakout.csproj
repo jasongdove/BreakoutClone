@@ -48,6 +48,8 @@
     <Compile Include="Screens\PlayScreen.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\Lives.cs" />
+    <Compile Include="UI\Score.cs" />
     <Compile Include="UI\UserInterface.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -104,6 +106,11 @@
       <Project>{6d0a1296-a7c8-4a73-bd6c-d38ccd389ad6}</Project>
       <Name>GameEngine</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\GameFont.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

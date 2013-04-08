@@ -45,7 +45,7 @@ namespace Breakout
         {
             Body.Position = new Vector2(
                 ConvertUnits.ToSimUnits((_screenBounds.Width - Texture.Width) / 2f),
-                ConvertUnits.ToSimUnits(_screenBounds.Height - 50));
+                ConvertUnits.ToSimUnits(_screenBounds.Height - 70));
         }
 
         public override void Initialize()

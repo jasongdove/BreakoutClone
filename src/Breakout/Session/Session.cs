@@ -18,13 +18,18 @@ namespace Breakout
             _screenBounds = screenBounds;
             _world = new World(new Vector2(0, 10));
 
-            _level = new Level(_world, screenBounds);
-
             _player = new Player();
-            _player.Lives = 5;
+            _player.Lives = 3;
+
+            _level = new Level(_world, screenBounds, _player);
         }
 
         public bool IsPaused { get; private set; }
+
+        public Player Player
+        {
+            get { return _player; }
+        }
 
         public World World
         {
