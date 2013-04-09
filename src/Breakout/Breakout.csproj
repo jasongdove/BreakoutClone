@@ -41,7 +41,6 @@
     <Compile Include="Level\Level.cs" />
     <Compile Include="Level\Paddle.cs" />
     <Compile Include="Level\Walls.cs" />
-    <Compile Include="Screens\DebugScreen.cs" />
     <Compile Include="Screens\PauseScreen.cs" />
     <Compile Include="Session\Player.cs" />
     <Compile Include="Session\Session.cs" />
@@ -58,6 +57,10 @@
     </Reference>
     <Reference Include="FarseerPhysicsXNA">
       <HintPath>..\..\lib\FarseerPhysicsXNA.dll</HintPath>
+    </Reference>
+    <Reference Include="GameEngine, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\GameEngine.0.0.0-debug001\lib\net40\GameEngine.dll</HintPath>
     </Reference>
     <Reference Include="OpenTK">
       <HintPath>$(MSBuildExtensionsPath)\..\MonoGame\v3.0\Assemblies\WindowsGL\OpenTK.dll</HintPath>
@@ -105,12 +108,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GameEngine\GameEngine.csproj">
-      <Project>{6d0a1296-a7c8-4a73-bd6c-d38ccd389ad6}</Project>
-      <Name>GameEngine</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Content\GameFont.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -124,6 +121,9 @@
     <Content Include="Content\001.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
