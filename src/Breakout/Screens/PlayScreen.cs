@@ -32,6 +32,8 @@ namespace Breakout.Screens
 
             InputMap.NewAction("FireBall", Keys.Space);
             InputMap.NewAction("FireBall", Buttons.A);
+
+            InputMap.NewAction("Pause", Keys.Escape);
         }
 
         public override void LoadContent()
@@ -68,11 +70,10 @@ namespace Breakout.Screens
                 _session.Level.Ball.Fire();
             }
 
-            // TODO: Support pausing
-            ////if (InputMap.NewActionPress("Pause"))
-            ////{
-            ////    _session.Pause();
-            ////}
+            if (InputMap.NewActionPress("Pause"))
+            {
+                _session.Pause();
+            }
 
             _session.Update(gameTime);
         }

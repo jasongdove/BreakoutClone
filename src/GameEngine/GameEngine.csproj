@@ -52,11 +52,15 @@
     <Compile Include="GameScreen.cs" />
     <Compile Include="InputMap.cs" />
     <Compile Include="InputSystem.cs" />
+    <Compile Include="MenuScreen.cs" />
+    <Compile Include="MenuState.cs" />
     <Compile Include="MousePresses.cs" />
     <Compile Include="ObjectStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScreenManager.cs" />
     <Compile Include="ScreenState.cs" />
+    <Compile Include="TransitionEventArgs.cs" />
+    <Compile Include="TransitionState.cs" />
     <Compile Include="Triggers.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

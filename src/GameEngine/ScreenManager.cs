@@ -25,6 +25,11 @@ namespace GameEngine
             get { return Game.Content; }
         }
 
+        public Viewport Viewport
+        {
+            get { return GraphicsDevice.Viewport; }
+        }
+
         public void AddScreen(GameScreen screen)
         {
             screen.ScreenManager = this;
